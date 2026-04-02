@@ -36,6 +36,23 @@ const CartSlice = createSlice({
             state.cartItems.push({ ...action.payload, quantity: 1 });
         }
     },
+    /**This reducer funciton handles the action of removing an
+     * item from the cart.
+     * It takes two parameters: **state** and **action**.
+     * It uploads the cartItems array by filtering out the
+     * item with the ID provided in the **action payload**.
+     */
+    removeItemFromCart(state, action) {
+        state.cartItems = state.cartItems.filter(item => item.id !== action.payload);
+    },
+    /**This function handles the action of clearing the entire cart.
+     * It takes only the state parameter.
+     * It sets the cartItems array to an empty array, effectively
+     * clearing all items from the cart.
+     */
+    clearCart(state) {
+        state.cartItems = [];
+    },
    }
 });
 
