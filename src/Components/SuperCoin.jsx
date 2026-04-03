@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const SuperCoin = () => {
-
+/**Now initialize superCoins variable using useState() hook 
+ * along with its corresponding function before return of
+ * the component
+*/
     const [superCoins, setSuperCoins] = useState(0);
     /**Now we need to retrive the cartItems from the cart slice
      * of the Redux store's state to get the total quantity of products
@@ -14,7 +17,7 @@ const SuperCoin = () => {
      * of the price and quantity for each item in the cartItems
      * array using the reduce method.
      */
-    const totalAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    const totalAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 70);
 
     /**Now we need to update the superCoins state based on the
      * totalAmount setting it to 10, 20, or 30 coins for
