@@ -53,7 +53,55 @@ const CartSlice = createSlice({
     clearCart(state) {
         state.cartItems = [];
     },
+    /**This reducer function handles the action of increasing
+     * the quantity of a specific item in the cart.
+     * It takes two parameters: state and action.
+     * 
+     * state: This represents the current state of the Redux
+     * store. It typically includes the data relevant to the application.
+     * 
+     * action: This is an object that describes the action that
+     * occurred. Redux actionss are plain JavaScript objects
+     * that must have a type property indicating the tyype of
+     * action being performed. Additionally, they may contain
+     * additional data necessary to carry out the action. In
+     * this case, action.payload likely contains the identifier (id)
+     * of the item whose quantity needs to be increased.
+     */
+    increaseItemQuantity(state, action) {
+        // It finds the item in the shopping carrt whose identifier
+        // (id) matches the identifier passed in the action paylooad.
+        const itemToIncrease = state.cartItems.find(item => item.id === action.payload);
+        // If the item is found (itemToIncrease is not undefined),
+        // it increments the quantity property of that item by 1.
+        if (itemToIncrease) {
+            itemToIncrease.quantity += 1;
+        }
+    },
+    decreaseItemQuantity(state, action) {
+        const itemToDecrease = state.cartItems.find(item => item.id === action.payload);
+        // If the item is found (itemToDecrease is not undefined) and
+        // its quantity is greater than 1, it decrements the quantity
+        // property of that item by 1.
+        if (itemToDecrease && itemToDecrease.quantity > 1){
+             itemToDecrease.quantity -=1;
+        }  
+    },
    }
 });
-
-
+//Exporting Action Creators and Reducers.
+/**createSlice returns an object containing the genereated
+ * action creators and the reducer function.
+ * 
+ * We can then export these action creators and the reducer
+ * function to use in our Redux store setup and throughout
+ * our application
+ */
+export const {
+    addItemToCart,
+    removeItemFromCart,
+    clearCart,
+    increaseItemQuantity,
+    decreaseItemQuantity,
+} = CartSlice.actions;
+export default CartSlice.reducer;
